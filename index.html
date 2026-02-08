@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gastronome | Amman's Premier Fine Dining</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --burgundy: #5D001E;
+      --gold: #D4AF37;
+      --cream: #FDF5E6;
+      --charcoal: #1A1A1A;
+      --taupe: #BCA992;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--charcoal);
+      background-color: #fff;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header .container {
+      width: 95%;
+      max-width: 1400px;
+      padding: 0 10px;
+    }
+    
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.95);
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      padding: 5px 0;
+      transition: all 0.3s ease;
+    }
+    
+    header.scrolled {
+      padding: 10px 0;
+      background: rgba(0, 0, 0, 0.98);
+    }
+    
+    .header-container {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-areas: "title nav";
+      align-items: center;
+      position: relative;
+      gap: 40px;
+    }
+
+    .site-title {
+      grid-area: title;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 6px;
+      color: var(--gold);
+      text-transform: uppercase;
+      justify-self: start;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 42px;
+      flex: 0 0 auto;
+    }
+    
+    nav {
+      position: relative;
+      margin-left: 0;
+      flex-shrink: 0;
+      justify-self: end;
+      grid-area: nav;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 35px;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      position: relative;
+      padding: 14px 18px;
+      display: block;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: left;
+      color: white;
+      position: relative;
+      padding-left: 60px;
+    }
+    
+    .hero-content {
+      max-width: 600px;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .hero h1 {
+      font-size: 5.5rem;
+      letter-spacing: 12px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      background: linear-gradient(to right, #fff, var(--gold));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 0.9;
+      text-align: left;
+    }
+    
+    .hero p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-style: italic;
+      margin-bottom: 40px;
+      opacity: 0.9;
+      text-align: left;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--charcoal);
+      padding: 16px 45px;
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border: 2px solid var(--gold);
+    }
+    
+    .btn:hover {
+      background: transparent;
+      color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    
+    /* Menu Section */
+    .menu {
+      padding: 120px 0;
+      background-color: var(--cream);
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    
+    .section-title h2 {
+      font-size: 3.5rem;
+      color: var(--burgundy);
+      position: relative;
+      display: inline-block;
+      padding-bottom: 20px;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--gold);
+    }
+    
+    .section-title p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: #666;
+      max-width: 600px;
+      margin: 25px auto 0;
+      font-style: italic;
+    }
+    
+    .dishes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 40px;
+    }
+    
+    .dish-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    .dish-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    
+    .dish-img {
+      height: 240px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .dish-content {
+      padding: 30px;
+    }
+    
+    .dish-content h3 {
+      font-size: 1.8rem;
+      color: var(--burgundy);
+      margin-bottom: 8px;
+    }
+    
+    .dish-origin {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--charcoal);
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    .dish-desc {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      min-height: 80px;
+    }
+    
+    .dish-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-align: right;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--charcoal);
+      color: white;
+      padding: 80px 0 40px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+    
+    .footer-col h4 {
+      font-size: 1.6rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+    }
+    
+    .footer-col p, .footer-col a {
+      color: #bbb;
+      margin-bottom: 12px;
+      display: block;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-col a:hover {
+      color: var(--gold);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 40px;
+      border-top: 1px solid #333;
+      color: #888;
+      font-size: 0.95rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero h1 {
+        font-size: 4rem;
+        letter-spacing: 8px;
+      }
+      .hero p {
+        font-size: 1.5rem;
+      }
+      nav ul {
+        gap: 20px;
+      }
+      nav a {
+        font-size: 16px;
+      }
+      .dishes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 3rem;
+        letter-spacing: 5px;
+      }
+      .hero p {
+        font-size: 1.3rem;
+      }
+      nav ul {
+        display: none;
+      }
+      .section-title h2 {
+        font-size: 2.5rem;
+      }
+      .dishes-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="container header-container">
+      <div class="site-title">
+        <svg class="brand-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="brandGold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#F7E39C"/>
+              <stop offset="55%" stop-color="#D4AF37"/>
+              <stop offset="100%" stop-color="#A67C00"/>
+            </linearGradient>
+            <filter id="brandGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="2" stdDeviation="1.6" flood-color="#D4AF37" flood-opacity="0.35"/>
+            </filter>
+          </defs>
+          <g transform="translate(45, 40)" filter="url(#brandGlow)">
+            <path d="M-10 0 L-10 -22 L-14 -22 L-7 -30 L0 -22 L-4 -22 L-4 0 L-10 0 Z" fill="url(#brandGold)"/>
+            <path d="M8 0 L8 -18 L15 -25 L22 -18 L22 0 L8 0 Z" fill="url(#brandGold)"/>
+            <circle cx="0" cy="-26" r="3" fill="url(#brandGold)"/>
+          </g>
+        </svg>
+        <span>GASTRONOME</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#reservations">Reservations</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>GASTRONOME</h1>
+      <p>Where Jordanian hospitality meets global culinary artistry</p>
+      <a href="#menu" class="btn">Discover Our Menu</a>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section class="menu" id="menu">
+    <div class="container">
+      <div class="section-title">
+        <h2>Ten Culinary Journeys</h2>
+        <p>Authentic dishes crafted by our internationally trained chefs</p>
+      </div>
+      
+      <div class="dishes-grid">
+        <!-- Dish 1 -->
+        <div class="dish-card">
+          <div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+          <div class="dish-content">
+            <span class="dish-origin">Italy</span>
+            <h3>Truffle Tagliatelle</h3>
+            <p class="dish-desc">Hand-cut pasta with black winter truffle, aged Parmigiano-Reggiano, and wild porcini in a delicate butter emulsion.</p>
+            <div class="dish-price">$32</div>
+          </div>
+        </div>
+        
+        <!-- Dish 2 -->
+        <div class="dish-card">
+          <div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+          <div class="dish-content">
+            <span class="dish-origin">Japan</span>
+            <h3>Otoro Toro Tartare</h3>
+            <p class="dish-desc">Premium bluefin tuna belly with yuzu kosho, crispy shallots, and Oscietra caviar served on chilled river stone.</p>
+            <div class="dish-price">$68</div>
+          </div>
+        </div>
+        
+        <!-- Dish 3 -->
+        <div class="dish-card">
+          <div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+          <div class="dish-content">
+            <span class="dish-origin">France</span>
+            <h3>Canard à l'Orange</h3>
+            <p class="dish-desc">Roasted Barbary duck breast with Grand Marnier glaze, pommes Anna, and seasonal market vegetables.</p>
+            <div class="dish-price">$48</div>
+          </div>
+        </div>
+        
+        <!-- Dish 4 -->
+        <div class="dish-card">
+          <div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1547592165-6a67963c77e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+          <div class="dish-content">
+            <span class="dish-origin">Spain</span>
+            <h3>Paella de Mariscos</h3>
+            <p class="dish-desc">Saffron-infused Bomba rice with lobster, tiger prawns, mussels, and squid cooked over open flame in a traditional paella pan.</p>
+            <div class="dish-price">$54</div>
+          </div>
+        </div>
+        
+        <!-- Dish 5 -->
+        <div class="dish-card">
+          <div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1563379926898-05f459600f0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+          <div class="dish-content">
+            <span class="dish-origin">Thailand</span>
+            <h3>Massaman Lamb Shank</h3>
+            <p class="dish-desc">Slow-braised Australian lamb shank in coconut curry with tamarind, peanuts, and aromatic Thai spices.</p>
+            <div class="dish-price">$46</div>
+          </div>
+        </div>
+        
+        <!-- Dish 6 -->
+        <div class="dish-card">
+          <div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1555939362-72e9bb92eda0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+          <div class="dish-content">
+            <span class="dish-origin">Peru</span>
+            <h3>Ceviche Nikkei</h3>
+            <p class="dish-desc">Line-caught sea bass cured in leche de tigre with yuzu, rocoto chili, sweet potato, and crispy plantain.</p>
+            <div class="dish-price">$38</div>
+          </div>
+        </div>
+        
+        <!-- Dish 7 -->
+        <div class="dish-card">
+          <div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1606755965715-0a8e8b7a7fee?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+          <div class="dish-content">
+            <span class="dish-origin">India</span>
+            <h3>Wild Mushroom Biryani</h3>
+            <p class="dish-desc">Basmati rice layered with foraged mushrooms, saffron, and biryani spices, dum-cooked with edible rose petals.</p>
+            <div class="dish-price">$36</div>
+          </div>
+        </div>
+        
+        <!-- Dish 8 -->
+        <div class="dish-card">
+          <div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1563379926898-05f459600f0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+          <div class="dish-content">
+            <span class="dish-origin">Lebanon</span>
+            <h3>Wagyu Kibbeh Nayyeh</h3>
+            <p class="dish-desc">Japanese A5 Wagyu hand-pounded with bulgur, aged Lebanese olive oil, and mountain za'atar. Served with house-made flatbread.</p>
+            <div class="dish-price">$58</div>
+          </div>
+        </div>
+        
+        <!-- Dish 9 -->
+        <div class="dish-card">
+          <div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1565299586742-424e86f8d688?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+          <div class="dish-content">
+            <span class="dish-origin">Mexico</span>
+            <h3>Mole Poblano de Pato</h3>
+            <p class="dish-desc">Duck confit with complex 32-ingredient mole negro, handmade tortillas, and pickled red onions.</p>
+            <div class="dish-price">$44</div>
+          </div>
+        </div>
+        
+        <!-- Dish 10 -->
+        <div class="dish-card">
+          <div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1571115177098-69a5a6c3a9a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+          <div class="dish-content">
+            <span class="dish-origin">Austria</span>
+            <h3>Sachertorte</h3>
+            <p class="dish-desc">Original Viennese chocolate cake with apricot confit and whipped Schlagobers. Paired with single-origin Ethiopian pour-over coffee.</p>
+            <div class="dish-price">$22</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="180">
+            <g transform="translate(200, 65)">
+              <path d="M-25 0 L-25 -35 L-30 -35 L-20 -45 L-10 -35 L-15 -35 L-15 0 L-25 0 Z" fill="#D4AF37"/>
+              <path d="M15 0 L15 -25 L25 -35 L35 -25 L35 0 L15 0 Z" fill="#D4AF37"/>
+              <circle cx="0" cy="-42" r="4" fill="#D4AF37"/>
+            </g>
+            <text x="200" y="115" font-family="Playfair Display" font-size="36" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="4">GASTRONOME</text>
+          </svg>
+        </div>
+        <div class="footer-col">
+          <h4>Location</h4>
+          <p>Abdoun Circle, Building 7</p>
+          <p>Amman 11190, Jordan</p>
+          <p>+962 6 555 7890</p>
+        </div>
+        <div class="footer-col">
+          <h4>Hours</h4>
+          <p>Lunch: 12:30 PM – 3:30 PM</p>
+          <p>Dinner: 7:00 PM – 11:00 PM</p>
+          <p>Closed Mondays</p>
+        </div>
+        <div class="footer-col">
+          <h4>Reservations</h4>
+          <p>reservations@gastronome.jo</p>
+          <p>+962 7 9000 1234</p>
+          <p>OpenTable available</p>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2026 Gastronome Amman. All rights reserved. Culinary Excellence Since 2010</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
